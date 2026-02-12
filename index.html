@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>BookLoop - Small Business Finance & Accounting</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
@@ -963,10 +965,20 @@
                 left: -260px;
                 z-index: 999;
                 height: 100vh;
+                box-shadow: var(--shadow-lg);
+                transition: left 0.3s ease;
             }
 
             .sidebar.active {
-                transform: translateX(260px);
+                left: 0;
+            }
+
+            .app-container {
+                position: relative;
+            }
+
+            .main-content {
+                width: 100%;
             }
 
             .dashboard-grid {
@@ -978,7 +990,11 @@
             }
 
             .topbar {
-                padding: 16px;
+                padding: 12px 16px;
+            }
+
+            .search-bar {
+                display: none; /* Hide on mobile, show search icon instead */
             }
 
             .content-area {
@@ -987,6 +1003,227 @@
 
             .pricing-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .stat-value {
+                font-size: 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .line-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                background: var(--bg-main);
+                padding: 12px;
+                border-radius: 10px;
+                margin-bottom: 12px;
+            }
+
+            .remove-line {
+                width: 100%;
+                height: 36px;
+            }
+
+            .modal-content {
+                margin: 20px;
+                max-height: calc(100vh - 40px);
+            }
+
+            .modal-header {
+                padding: 24px 20px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+
+            .onboarding-step {
+                padding: 20px;
+            }
+
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Mobile menu button */
+            .mobile-menu-btn {
+                display: flex;
+                width: 40px;
+                height: 40px;
+                align-items: center;
+                justify-content: center;
+                background: var(--bg-main);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                cursor: pointer;
+                margin-right: 12px;
+            }
+
+            .topbar-actions {
+                gap: 8px;
+            }
+
+            .icon-button {
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Make tables scrollable on mobile */
+            .card table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            /* Stack cards vertically */
+            .card + .card {
+                margin-top: 16px;
+            }
+
+            /* Touch-friendly button sizes */
+            .btn {
+                min-height: 44px;
+                padding: 12px 20px;
+            }
+
+            /* Better spacing for mobile */
+            .transaction-item {
+                padding: 12px;
+                flex-wrap: wrap;
+            }
+
+            .transaction-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .transaction-amount {
+                width: 100%;
+                text-align: right;
+                margin-top: 8px;
+                font-size: 18px;
+            }
+
+            /* Simplify complex grids on mobile */
+            .connection-option {
+                padding: 16px;
+            }
+
+            .connection-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            /* Chat interface on mobile */
+            .copilot-section {
+                height: calc(100vh - 100px);
+            }
+
+            #chat-messages {
+                font-size: 14px;
+            }
+
+            /* Mobile-specific stat cards */
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-header {
+                margin-bottom: 12px;
+            }
+
+            .stat-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .sidebar {
+                width: 220px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-area {
+                padding: 24px;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 1025px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Mobile menu button (always hidden on desktop) */
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex !important;
+            }
+        }
+
+        /* Overlay for mobile menu */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        /* Improve touch targets */
+        @media (max-width: 768px) {
+            .nav-item {
+                padding: 14px 12px;
+                font-size: 15px;
+            }
+
+            .user-profile {
+                padding: 14px 12px;
+            }
+
+            .form-input, .form-select, .form-textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 14px 16px;
+            }
+
+            input[type="checkbox"] {
+                width: 24px;
+                height: 24px;
             }
         }
 
@@ -1111,6 +1348,11 @@
         <main class="main-content">
             <!-- Top Bar -->
             <header class="topbar">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
                 <div class="search-bar">
                     <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -1138,6 +1380,9 @@
                 </div>
             </header>
 
+            <!-- Mobile Overlay -->
+            <div class="mobile-overlay" id="mobile-overlay" onclick="toggleMobileMenu()"></div>
+
             <!-- Content Area -->
             <div class="content-area" id="content-area">
                 <!-- Dashboard Section -->
@@ -1152,19 +1397,19 @@
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
                             <div>
                                 <div style="font-size: 13px; opacity: 0.9; margin-bottom: 8px; font-weight: 600;">💰 Can you afford to hire someone?</div>
-                                <div style="font-size: 32px; font-weight: 800; font-family: 'Instrument Serif', serif; margin-bottom: 4px;">Yes, comfortably</div>
+                                <div style="font-size: 28px; font-weight: 800; font-family: 'Instrument Serif', serif; margin-bottom: 4px;">Yes, comfortably</div>
                                 <div style="font-size: 14px; opacity: 0.85;">You're averaging $9,200/week profit. A new hire at $3,500/month is safe.</div>
                             </div>
                             <div>
                                 <div style="font-size: 13px; opacity: 0.9; margin-bottom: 8px; font-weight: 600;">📅 Cash runway</div>
-                                <div style="font-size: 32px; font-weight: 800; font-family: 'Instrument Serif', serif; margin-bottom: 4px;">47 days</div>
+                                <div style="font-size: 28px; font-weight: 800; font-family: 'Instrument Serif', serif; margin-bottom: 4px;">47 days</div>
                                 <div style="font-size: 14px; opacity: 0.85;">At current spending, your cash lasts until March 14. That's healthy.</div>
                             </div>
                             <div>
                                 <div style="font-size: 13px; opacity: 0.9; margin-bottom: 8px; font-weight: 600;">🎯 This week's focus</div>
-                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Follow up on 3 late invoices</div>
-                                <div style="font-size: 14px; opacity: 0.85;">$4,800 is sitting unpaid. Want me to send reminders?</div>
-                                <button style="margin-top: 12px; padding: 8px 20px; background: white; color: var(--primary); border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Send Reminders Now</button>
+                                <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">Follow up on 3 late invoices</div>
+                                <div style="font-size: 14px; opacity: 0.85; margin-bottom: 12px;">$4,800 is sitting unpaid. Want me to send reminders?</div>
+                                <button style="padding: 10px 20px; background: white; color: var(--primary); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; max-width: 200px;">Send Reminders Now</button>
                             </div>
                         </div>
                     </div>
@@ -2744,6 +2989,31 @@
         function closePricing() {
             document.getElementById('pricing-modal').classList.remove('active');
         }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('mobile-overlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (sidebar.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close mobile menu when clicking a nav item
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
 
         // Invoice Modal Functions
         function openInvoiceModal() {
